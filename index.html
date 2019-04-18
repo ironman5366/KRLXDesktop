@@ -1,0 +1,53 @@
+<head>
+    <title>KRLX</title>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">KRLX</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <h1>Currently Playing:</h1>
+    <link rel="stylesheet" href="node_modules/bootswatch/dist/sketchy/bootstrap.min.css">
+</head>
+<!-- Purechat Widget -->
+<body>
+<div class="container-fluid">
+
+</div>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    window.jQuery = window.$ = require('jquery');
+</script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://app.purechat.com//assets/widget-script.100181.js"></script>
+<script type='text/javascript' data-cfasync='false'>$(document).ready(function(){
+    window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({c: '47c7413c-6718-46f1-80d3-3c6defd2db13', f: true }); done = true; } }; })();
+    });
+</script>
+<script src="page.js"></script>
+</body>
+<footer>
+    &copy Will Beddow '22 & Kristin Albright '22 <script>document.write(new Date().getFullYear())</script>
+
+</footer>
