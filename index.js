@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow } = require('electron');
+const fs = require('fs');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -35,6 +36,8 @@ app.on('window-all-closed', () => {
         app.quit()
     }
 });
+
+
 
 app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the

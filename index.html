@@ -27,13 +27,62 @@
             </form>
         </div>
     </nav>
-    <h1>Currently Playing:</h1>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/brands.js" integrity="sha384-rUOIFHM3HXni/WG5pzDhA1e2Js5nn4bWudTYujHbbI9ztBIxK54CL4ZNZWwcBQeD" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/fontawesome.js" integrity="sha384-EMmnH+Njn8umuoSMZ3Ae3bC9hDknHKOWL2e9WJD/cN6XLeAN7tr5ZQ0Hx5HDHtkS" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="node_modules/bootswatch/dist/sketchy/bootstrap.min.css">
 </head>
 <!-- Purechat Widget -->
 <body>
 <div class="container-fluid">
-
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row" class="col-md-12">
+                <h1>Currently On</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="currshow">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <h1>Songs</h1>
+                <div id="songs">
+                </div>
+                <div>
+                    <ul class="pagination">
+                        <li id="last-song" class="song-page page-item disabled">
+                            <a onclick="set_songs(-1)" class="page-link" href="#">&laquo;</a>
+                        </li>
+                        <li class="song-page page-item active">
+                            <a onclick="set_songs(1)" class="page-link" href="#">1</a>
+                        </li>
+                        <li class="song-page page-item">
+                            <a onclick="set_songs(2)" class="page-link" href="#">2</a>
+                        </li>
+                        <li class="song-page page-item">
+                            <a onclick="set_songs(3)" class="page-link" href="#">3</a>
+                        </li>
+                        <li class="song-page page-item">
+                            <a onclick="set_songs(4)" class="page-link" href="#">4</a>
+                        </li>
+                        <li id="next-song" class="song-page page-item">
+                            <a onclick="set_songs(0)" class="page-link" href="#">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <h1>Shows</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <strong class="h1">Status: </strong></h4><span id="currstatus"><span class="badge badge-pill badge-info">Loading...</span></span>
+        </div>
+    </div>
 </div>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script>
@@ -47,7 +96,40 @@
 </script>
 <script src="page.js"></script>
 </body>
-<footer>
-    &copy Will Beddow '22 & Kristin Albright '22 <script>document.write(new Date().getFullYear())</script>
 
+<footer class="navbar fixed-bottom">
+    <div class="col-md-4">
+    </div>
+   <div class="col-md-4">
+       <a href="#" id="audioControl"><img class="img-fluid" src="assets/play.svg" width="50" height="50"></a>
+       <!--<img class=img-fluid" width=50 height=50 src="assets/play.svg">-->
+       <audio id="stream" data-seek="off" data-time="off" style="display:none">
+           <!--<source src="http://krlx.out.airtime.pro:8000/krlx_a.m3u" type='audio/mpeg;codecs="mp3"'></source> -->
+           <source src="http://garnet.krlx.org:8000/krlx" type='audio/mpeg;codecs="mp3"'>
+       </audio>
+   </div>
+    <div class="col-md-4">
+        Made with ❤️ by Will Beddow '22 & Kristin Albright '22
+        <br>
+        &copy <script>document.write(new Date().getFullYear())</script>
+    </div>
+    <script>
+        let play_button = '<img class="img-fluid" src="assets/play.svg" width="50" height="50">';
+        let pause_button = '<img class="img-fluid" src="assets/pause.svg" width="50" height="50">'
+        let yourAudio = document.getElementById('stream'),
+            ctrl = document.getElementById('audioControl');
+        ctrl.onclick = function () {
+
+            // Update the Button
+            var pause = ctrl.innerHTML === pause_button;
+            ctrl.innerHTML = pause ? play_button : pause_button;
+
+            // Update the Audio
+            var method = pause ? 'pause': 'play';
+            yourAudio[method]();
+
+            // Prevent Default Action
+            return false;
+        };
+    </script>
 </footer>
