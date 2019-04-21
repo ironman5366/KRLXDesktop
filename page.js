@@ -5,6 +5,7 @@ const { shell } = require('electron');
 const Base64 = require('./node_modules/js-base64').Base64;
 const fs = require('fs');
 const moment = require('./assets/moment.min.js');
+const spotify_api = require('./spotify_api.json');
 // The RegEx to resolve student images from the directory
 const DIR_REG = new RegExp('(<div class="email"><span class="icon">' +
     '\\n{0,1}<\\/span>(\\w+)&nbsp;)|<span class="icon"><\\/span><a href="mailto:(\\w+)@carleton.edu">');
@@ -267,9 +268,8 @@ function query_stream(){
 /**
  * Log in with Spotify
  */
-function spotify_basic_auth(data){
+function spotify_basic_auth(auth_data){
     console.log("Doing spotify auth");
-    let auth_data = JSON.parse(data);
     let client_id = auth_data.client_id;
     let client_secret = auth_data.client_secret;
     let auth_str = "Basic "+Base64.encode(client_id+":"+client_secret);
@@ -297,12 +297,7 @@ function spotify_basic_auth(data){
 }
 
 $(document).ready(function(){
-    fs.readFile('spotify_api.json', function(err, data) {
-        if (err) {
-            throw err;
-        }
-        spotify_basic_auth(data)
-    });
+    spotify_basic_auth(spotify_api);
     console.log("Starting interval");
     query_stream();
     // The handler for checking the KRLX API every 5 seconds

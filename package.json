@@ -24,14 +24,22 @@
   },
   "homepage": "https://github.com/ironman5366/KRLXDesktop#readme",
   "devDependencies": {
-    "electron": "^4.1.4"
+    "electron": "^4.1.4",
+    "electron-builder": "^20.39.0"
   },
   "build": {
     "appId": "KRLXDesktop",
     "mac": {
       "category": "Music"
-    }
+    },
+    "files": [
+      "spotify_api.json",
+      "assets/spotify_api.json",
+      "assets/*",
+      "**/**"
+    ]
   },
+
   "dependencies": {
     "bootstrap": "^4.3.1",
     "bootswatch": "^4.3.1",
