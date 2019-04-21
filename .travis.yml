@@ -1,5 +1,5 @@
 before_install:
-  - echo $SPOTIFY_SECRET > spotify_api.json
+  - python gen_secrets.py $SPOTIFY_CLIENT_ID $SPOTIFY_CLIENT_SECRET
 matrix:
   include:
     - os: osx
