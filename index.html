@@ -9,16 +9,13 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="#" onclick="require('electron').remote.getCurrentWindow().loadFile('schedule.html')">Schedule</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#" onclick="require('electron').shell.openExternal('https://willbeddow.com')">About</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -36,7 +33,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="row" class="col-md-12">
                 <h1>Currently On</h1>
             </div>
@@ -47,34 +44,36 @@
         </div>
         <div class="col-md-3">
             <div class="row">
-                <h1>Songs</h1>
-                <div id="songs">
-                </div>
-                <div>
-                    <ul class="pagination">
-                        <li id="last-song" class="song-page page-item disabled">
-                            <a onclick="set_songs(-1)" class="page-link" href="#">&laquo;</a>
-                        </li>
-                        <li class="song-page page-item active">
-                            <a onclick="set_songs(1)" class="page-link" href="#">1</a>
-                        </li>
-                        <li class="song-page page-item">
-                            <a onclick="set_songs(2)" class="page-link" href="#">2</a>
-                        </li>
-                        <li class="song-page page-item">
-                            <a onclick="set_songs(3)" class="page-link" href="#">3</a>
-                        </li>
-                        <li class="song-page page-item">
-                            <a onclick="set_songs(4)" class="page-link" href="#">4</a>
-                        </li>
-                        <li id="next-song" class="song-page page-item">
-                            <a onclick="set_songs(0)" class="page-link" href="#">&raquo;</a>
-                        </li>
-                    </ul>
+                <div class="col-md-12">
+                    <h1>Songs</h1>
+                    <div id="songs">
+                    </div>
+                    <div>
+                        <ul class="pagination">
+                            <li id="last-song" class="song-page page-item disabled">
+                                <a onclick="set_songs(-1)" class="page-link" href="#">&laquo;</a>
+                            </li>
+                            <li class="song-page page-item active">
+                                <a onclick="set_songs(1)" class="page-link" href="#">1</a>
+                            </li>
+                            <li class="song-page page-item">
+                                <a onclick="set_songs(2)" class="page-link" href="#">2</a>
+                            </li>
+                            <li class="song-page page-item">
+                                <a onclick="set_songs(3)" class="page-link" href="#">3</a>
+                            </li>
+                            <li class="song-page page-item">
+                                <a onclick="set_songs(4)" class="page-link" href="#">4</a>
+                            </li>
+                            <li id="next-song" class="song-page page-item">
+                                <a onclick="set_songs(0)" class="page-link" href="#">&raquo;</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <h1>Shows</h1>
         </div>
     </div>
@@ -118,8 +117,7 @@
         let pause_button = '<img class="img-fluid" src="assets/pause.svg" width="50" height="50">'
         let yourAudio = document.getElementById('stream'),
             ctrl = document.getElementById('audioControl');
-        ctrl.onclick = function () {
-
+        function do_playpause(){
             // Update the Button
             var pause = ctrl.innerHTML === pause_button;
             ctrl.innerHTML = pause ? play_button : pause_button;
@@ -130,6 +128,9 @@
 
             // Prevent Default Action
             return false;
+        }
+        ctrl.onclick = function () {
+            return do_playpause();
         };
     </script>
 </footer>

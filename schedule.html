@@ -1,0 +1,84 @@
+<head>
+    <title>KRLX</title>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">KRLX</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" onclick="require('electron').remote.getCurrentWindow().loadFile('index.html')">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Schedule</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="require('electron').shell.openExternal('https://willbeddow.com')">About</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/brands.js" integrity="sha384-rUOIFHM3HXni/WG5pzDhA1e2Js5nn4bWudTYujHbbI9ztBIxK54CL4ZNZWwcBQeD" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/fontawesome.js" integrity="sha384-EMmnH+Njn8umuoSMZ3Ae3bC9hDknHKOWL2e9WJD/cN6XLeAN7tr5ZQ0Hx5HDHtkS" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="node_modules/bootswatch/dist/sketchy/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Schedule</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <p><iframe style="border-width: 0;" src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=krlxradio88.1%40gmail.com&amp;color=%2329527A&amp;ctz=America%2FChicago" width="650" height="600" frameborder="0" scrolling="no"></iframe></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+<footer class="navbar fixed-bottom">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <a href="#" id="audioControl"><img class="img-fluid" src="assets/play.svg" width="50" height="50"></a>
+        <!--<img class=img-fluid" width=50 height=50 src="assets/play.svg">-->
+        <audio id="stream" data-seek="off" data-time="off" style="display:none">
+            <!--<source src="http://krlx.out.airtime.pro:8000/krlx_a.m3u" type='audio/mpeg;codecs="mp3"'></source> -->
+            <source src="http://garnet.krlx.org:8000/krlx" type='audio/mpeg;codecs="mp3"'>
+        </audio>
+    </div>
+    <div class="col-md-4">
+        Made with ❤️ by Will Beddow '22 & Kristin Albright '22
+        <br>
+        &copy <script>document.write(new Date().getFullYear())</script>
+    </div>
+    <script>
+        let play_button = '<img class="img-fluid" src="assets/play.svg" width="50" height="50">';
+        let pause_button = '<img class="img-fluid" src="assets/pause.svg" width="50" height="50">'
+        let yourAudio = document.getElementById('stream'),
+            ctrl = document.getElementById('audioControl');
+        function do_playpause(){
+            // Update the Button
+            var pause = ctrl.innerHTML === pause_button;
+            ctrl.innerHTML = pause ? play_button : pause_button;
+
+            // Update the Audio
+            var method = pause ? 'pause': 'play';
+            yourAudio[method]();
+
+            // Prevent Default Action
+            return false;
+        }
+        ctrl.onclick = function () {
+            return do_playpause();
+        };
+    </script>
+</footer>

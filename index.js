@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, globalShortcut } = require('electron');
 const fs = require('fs');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -14,13 +14,22 @@ function createWindow () {
     // and load the index.html of the app.
     win.loadFile('index.html');
 
+    // Register media shortcuts
+    globalShortcut.register("MediaPlayPause",
+        function(){
+            win.webContents.executeJavaScript('do_playpause();');
+    });
+
+
     // Emitted when the window is closed.
     win.on('closed', () => {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         win = null
-    })
+    });
+
+
 }
 
 // This method will be called when Electron has finished
