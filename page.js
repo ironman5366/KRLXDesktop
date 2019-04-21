@@ -9,7 +9,7 @@ const spotify_api = require('./spotify_api.json');
 // The RegEx to resolve student images from the directory
 const DIR_REG = new RegExp('(<div class="email"><span class="icon">' +
     '\\n{0,1}<\\/span>(\\w+)&nbsp;)|<span class="icon"><\\/span><a href="mailto:(\\w+)@carleton.edu">');
-const HOST_REG = new RegExp('(\\S+) (\\S+) \'(\\d\\d)');
+const HOST_REG = new RegExp('(\\S+) (\\S+ ){0,1}(\\S+) \'(\\d\\d)');
 let curr_songs = [];
 let spotify_auth = null;
 let song_queries = {
@@ -26,7 +26,7 @@ function get_host_widget(host_str){
     let parsed_host_str = HOST_REG.exec(host_str);
     console.log("Parsed");
     let first_name = parsed_host_str[1];
-    let last_name = parsed_host_str[2];
+    let last_name = parsed_host_str[3];
     let class_year = "20"+parsed_host_str[3];
     let username= null;
     let data = $.get({
