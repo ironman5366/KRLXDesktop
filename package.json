@@ -39,14 +39,14 @@
       "**/**"
     ]
   },
-
   "dependencies": {
     "bootstrap": "^4.3.1",
     "bootswatch": "^4.3.1",
     "jquery": "^3.4.0",
     "js-base64": "^2.5.1",
     "moment": "^2.24.0",
-    "popper": "^1.0.1"
+    "popper": "^1.0.1",
+    "yarn": "^1.15.2"
   },
   "postinstall": "electron-builder install-app-deps"
 }

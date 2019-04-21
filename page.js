@@ -138,7 +138,7 @@ function get_show_widget(show, hosts){
     end_d.setHours(end_split[0], end_split[1]);
     let start = moment(start_d);
     let end = moment(end_d);
-    let remaining = end.fromNow();
+    let remaining = end.toNow();
     let card = "<div class=\"card\">\n" +
         "  <div class=\"card-body\">\n" +
         "    <h4 class=\"card-title\">"+show.title+"</h4>\n" +
@@ -165,7 +165,7 @@ function get_upcoming_widget(show){
     end_d.setHours(end_split[0], end_split[1]);
     let start = moment(start_d);
     let end = moment(end_d);
-    let until = start.fromNow();
+    let until = start.toNow();
     let widget = "<div class='card mb-3'>";
     widget += "<div><div class='card-header'>" +
     "      <h5 class=\"card-title\">"+show.title+"</h5>\n" +
