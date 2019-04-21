@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,12 @@
   "devDependencies": {
     "electron": "^4.1.4"
   },
+  "build": {
+    "appId": "KRLXDesktop",
+    "mac": {
+      "category": "Music"
+    }
+  },
   "dependencies": {
     "bootstrap": "^4.3.1",
     "bootswatch": "^4.3.1",
@@ -31,5 +39,6 @@
     "js-base64": "^2.5.1",
     "moment": "^2.24.0",
     "popper": "^1.0.1"
-  }
+  },
+  "postinstall": "electron-builder install-app-deps"
 }

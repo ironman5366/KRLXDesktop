@@ -1,7 +1,7 @@
 <head>
     <title>KRLX</title>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">KRLX</a>
+        <a class="navbar-brand" href="#" onclick="require('electron').remote.getCurrentWindow().loadFile('index.html')">KRLX</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,10 +18,6 @@
                     <a class="nav-link" href="#" onclick="require('electron').shell.openExternal('https://willbeddow.com')">About</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </nav>
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/brands.js" integrity="sha384-rUOIFHM3HXni/WG5pzDhA1e2Js5nn4bWudTYujHbbI9ztBIxK54CL4ZNZWwcBQeD" crossorigin="anonymous"></script>
@@ -42,7 +38,11 @@
             </div>
         </div>
     </div>
-
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        window.jQuery = window.$ = require('jquery');
+    </script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <footer class="navbar fixed-bottom">
     <div class="col-md-4">

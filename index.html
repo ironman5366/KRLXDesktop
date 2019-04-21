@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="#" >Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="require('electron').remote.getCurrentWindow().loadFile('schedule.html')">Schedule</a>
@@ -18,10 +18,6 @@
                     <a class="nav-link" href="#" onclick="require('electron').shell.openExternal('https://willbeddow.com')">About</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </nav>
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/brands.js" integrity="sha384-rUOIFHM3HXni/WG5pzDhA1e2Js5nn4bWudTYujHbbI9ztBIxK54CL4ZNZWwcBQeD" crossorigin="anonymous"></script>
@@ -74,7 +70,10 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h1>Shows</h1>
+            <h1>Upcoming</h1>
+            <div class="col-md-12" id="upcoming">
+
+            </div>
         </div>
     </div>
     <div class="row">

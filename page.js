@@ -133,8 +133,6 @@ function get_show_widget(show, hosts){
     //[year, month, day, hour, minute, second, millisecond]
     let start_split = show.start.split(":");
     start_d.setHours(start_split[0], start_split[1]);
-    console.log(start_split[0]);
-    console.log(start_split[1]);
     let end_split = show.end.split(":");
     end_d.setHours(end_split[0], end_split[1]);
     let start = moment(start_d);
@@ -154,6 +152,30 @@ function get_show_widget(show, hosts){
         " </ul><br><p>Ends "+remaining+"</p></div>\n" +
         "</div>";
     return card
+}
+
+function get_upcoming_widget(show){
+    let start_d = new Date();
+    let end_d = new Date();
+    //[year, month, day, hour, minute, second, millisecond]
+    let start_split = show.start.split(":");
+    start_d.setHours(start_split[0], start_split[1]);
+    let end_split = show.end.split(":");
+    end_d.setHours(end_split[0], end_split[1]);
+    let start = moment(start_d);
+    let end = moment(end_d);
+    let until = start.fromNow();
+    let widget = "<div class='card mb-3'>";
+    widget += "<div><div class='card-header'>" +
+    "      <h5 class=\"card-title\">"+show.title+"</h5>\n" +
+    "      <h6 class='card-subtitle'>"+show.day+","+start.format("h:mm A")+"-"+end.format("h:mm A")+"</h6>\n"+
+        "</div>"+
+    "    </div><div class='card-body'>\n" +
+    "    <p class=\"mb-1\">"+show.description+"</p>\n" +
+        "<p class='mb-1'>"+show.djs.join(',')+"</p>"+
+        "</div><div class='card-footer'><p class='mb-1'>Starts "+until+"</p></div>"+
+    "  </a></div></div>";
+    return widget
 }
 
 function set_songs(page){
@@ -205,7 +227,13 @@ function handle_data(data){
 
         curr_songs = data.songs;
         set_songs(1);
-        //$("#currsong")[0].innerHTML = get_song_widget(data.songs[0])
+        let next_widget = "<div>";
+        for (show of data.next){
+            show_widget = get_upcoming_widget(show);
+            next_widget += show_widget;
+        }
+        next_widget += '</div>';
+        $("#upcoming")[0].innerHTML = next_widget;
     }
     else{
         $("#currstatus")[0].innerHTML = "<span class='badge badge-pill badge-danger'>"+data.status+"</span>";
@@ -227,9 +255,6 @@ function query_stream(){
             $.get({
                 url: API_URL,
                 success: function (data){
-                    // TODO: figure out how to fix mixed escape characters
-                    // Chars that the KRLX API fucks up on
-                    data = data.replace('"Resurrection"', 'Resurrection');
                     let parsed_data = JSON.parse(data);
                     console.log("Fixed stream data");
                     handle_data(parsed_data);
