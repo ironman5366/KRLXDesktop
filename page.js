@@ -131,6 +131,18 @@ function get_song_widget(song){
 function get_show_widget(show, hosts){
     let start_d = new Date();
     let end_d = new Date();
+    if (!show.start){
+        show.start = "17:00"
+    }
+    if (!show.end){
+        show.end = "19:00"
+    }
+    if (!show.day){
+        show.day = start_d.getDay();
+    }
+    if (!show.description){
+        show.description = "No description found";
+    }
     //[year, month, day, hour, minute, second, millisecond]
     let start_split = show.start.split(":");
     start_d.setHours(start_split[0], start_split[1]);
@@ -138,7 +150,10 @@ function get_show_widget(show, hosts){
     end_d.setHours(end_split[0], end_split[1]);
     let start = moment(start_d);
     let end = moment(end_d);
-    let remaining = end.toNow();
+    let remaining = end.fromNow();
+    if (remaining.includes("ago")){
+        remaining = end.toNow();
+    }
     let card = "<div class=\"card\">\n" +
         "  <div class=\"card-body\">\n" +
         "    <h4 class=\"card-title\">"+show.title+"</h4>\n" +
@@ -159,13 +174,29 @@ function get_upcoming_widget(show){
     let start_d = new Date();
     let end_d = new Date();
     //[year, month, day, hour, minute, second, millisecond]
+    // Fix bandemonium start end
+    if (!show.start){
+        show.start = "17:00"
+    }
+    if (!show.end){
+        show.end = "19:00"
+    }
+    if (!show.day){
+        show.day = start_d.getDay();
+    }
+    if (!show.description){
+        show.description = "No description found";
+    }
     let start_split = show.start.split(":");
     start_d.setHours(start_split[0], start_split[1]);
     let end_split = show.end.split(":");
     end_d.setHours(end_split[0], end_split[1]);
     let start = moment(start_d);
     let end = moment(end_d);
-    let until = start.toNow();
+    let until = start.fromNow();
+    if (until.includes("ago")){
+        until = start.toNow();
+    }
     let widget = "<div class='card mb-3'>";
     widget += "<div><div class='card-header'>" +
     "      <h5 class=\"card-title\">"+show.title+"</h5>\n" +
