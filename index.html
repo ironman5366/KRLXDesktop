@@ -30,41 +30,54 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-5">
-            <div class="row" class="col-md-12">
+            <div class="row">
                 <h1>Currently On</h1>
             </div>
             <div class="row">
                 <div class="col-md-12" id="currshow">
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <strong class="h1">Status: </strong></h4><span id="currstatus"><span class="badge badge-pill badge-info">Loading...</span></span>
+                </div>
+                <div class="row">
+                    Made with ❤️ by Will Beddow '22 & Kristin Albright '22
+                    <br>
+                    &copy <script>document.write(new Date().getFullYear())</script>
+                </div>
+            </div>
+
         </div>
         <div class="col-md-3">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Songs</h1>
-                    <div id="songs">
-                    </div>
-                    <div>
-                        <ul class="pagination">
-                            <li id="last-song" class="song-page page-item disabled">
-                                <a onclick="set_songs(-1)" class="page-link" href="#">&laquo;</a>
-                            </li>
-                            <li class="song-page page-item active">
-                                <a onclick="set_songs(1)" class="page-link" href="#">1</a>
-                            </li>
-                            <li class="song-page page-item">
-                                <a onclick="set_songs(2)" class="page-link" href="#">2</a>
-                            </li>
-                            <li class="song-page page-item">
-                                <a onclick="set_songs(3)" class="page-link" href="#">3</a>
-                            </li>
-                            <li class="song-page page-item">
-                                <a onclick="set_songs(4)" class="page-link" href="#">4</a>
-                            </li>
-                            <li id="next-song" class="song-page page-item">
-                                <a onclick="set_songs(0)" class="page-link" href="#">&raquo;</a>
-                            </li>
-                        </ul>
+                    <div class="row">
+                        <h1>Songs</h1>
+                        <div id="songs">
+                        </div>
+                        <div>
+                            <ul class="pagination">
+                                <li id="last-song" class="song-page page-item disabled">
+                                    <a onclick="set_songs(-1)" class="page-link" href="#">&laquo;</a>
+                                </li>
+                                <li class="song-page page-item active">
+                                    <a onclick="set_songs(1)" class="page-link" href="#">1</a>
+                                </li>
+                                <li class="song-page page-item">
+                                    <a onclick="set_songs(2)" class="page-link" href="#">2</a>
+                                </li>
+                                <li class="song-page page-item">
+                                    <a onclick="set_songs(3)" class="page-link" href="#">3</a>
+                                </li>
+                                <li class="song-page page-item">
+                                    <a onclick="set_songs(4)" class="page-link" href="#">4</a>
+                                </li>
+                                <li id="next-song" class="song-page page-item">
+                                    <a onclick="set_songs(0)" class="page-link" href="#">&raquo;</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -78,7 +91,6 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <strong class="h1">Status: </strong></h4><span id="currstatus"><span class="badge badge-pill badge-info">Loading...</span></span>
         </div>
     </div>
 </div>
@@ -96,9 +108,10 @@
 </body>
 
 <footer class="navbar fixed-bottom">
-    <div class="col-md-4">
+    <div class="col-md-1">
+
     </div>
-   <div class="col-md-4">
+   <div class="col-md-6">
        <a href="#" id="audioControl"><img class="img-fluid" src="assets/play.svg" width="50" height="50"></a>
        <!--<img class=img-fluid" width=50 height=50 src="assets/play.svg">-->
        <audio id="stream" data-seek="off" data-time="off" style="display:none">
@@ -106,11 +119,7 @@
            <source src="http://garnet.krlx.org:8000/krlx" type='audio/mpeg;codecs="mp3"'>
        </audio>
    </div>
-    <div class="col-md-4">
-        Made with ❤️ by Will Beddow '22 & Kristin Albright '22
-        <br>
-        &copy <script>document.write(new Date().getFullYear())</script>
-    </div>
+
     <script>
         let play_button = '<img class="img-fluid" src="assets/play.svg" width="50" height="50">';
         let pause_button = '<img class="img-fluid" src="assets/pause.svg" width="50" height="50">'
