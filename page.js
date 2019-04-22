@@ -17,6 +17,8 @@ let song_queries = {
     "apple": {}
 };
 
+let auth_missed = 0;
+
 /**
  * Take a host string in the form of Will Beddow '22 and return a widget with a picture of, and information
  * about, the host
@@ -115,6 +117,10 @@ function get_song_widget(song){
     }
     else{
         console.warn("No spotify auth :(");
+        auth_missed++;
+        if (auth_missed >= 2){
+            spotify_basic_auth(spotify_api);
+        }
     }
     song_item += "<br>Open in: ";
     if (apple_link){
@@ -300,6 +306,7 @@ function query_stream(){
  * Log in with Spotify
  */
 function spotify_basic_auth(auth_data){
+    auth_missed = 0;
     console.log("Doing spotify auth");
     let client_id = auth_data.client_id;
     let client_secret = auth_data.client_secret;
