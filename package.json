@@ -46,6 +46,7 @@
     "js-base64": "^2.5.1",
     "moment": "^2.24.0",
     "popper": "^1.0.1",
+    "popper.js": "^1.15.0",
     "yarn": "^1.15.2"
   },
   "postinstall": "electron-builder install-app-deps"
