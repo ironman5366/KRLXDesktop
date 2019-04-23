@@ -1,6 +1,5 @@
 # KRLX Desktop [![Build Status](https://travis-ci.org/ironman5366/KRLXDesktop.svg?branch=master)](https://travis-ci.org/ironman5366/KRLXDesktop)
 A desktop app for [KRLX](http://www.krlx.org/), written in Electron
-![Screenshot]: (https://imgur.com/m8YdQyy)
 
 ## Features:
 - Displays current show and information, pulling host info from Carleton directory

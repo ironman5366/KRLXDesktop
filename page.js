@@ -1,7 +1,7 @@
 const API_URL = 'http://live.krlx.org/data.php';
 const SPOTIFY_API_URL = 'https://api.spotify.com/v1/search';
 const SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/api/token';
-const { shell } = require('electron');
+const { shell, remote } = require('electron');
 const Base64 = require('./node_modules/js-base64').Base64;
 const fs = require('fs');
 const moment = require('./assets/moment.min.js');
@@ -10,6 +10,7 @@ const spotify_api = require('./spotify_api.json');
 const DIR_REG = new RegExp('(<div class="email"><span class="icon">' +
     '\\n{0,1}<\\/span>(\\w+)&nbsp;)|<span class="icon"><\\/span><a href="mailto:(\\w+)@carleton.edu">');
 const HOST_REG = new RegExp('(\\S+) ([^\\s\\d]+ )+(\'(\\d\\d)?|)|(\\S+) (\\S+)');
+const UPDATE_URL = 'https://willbeddow.com/app/krlx-desktop';
 let curr_songs = [];
 let spotify_auth = null;
 let song_queries = {
@@ -311,6 +312,47 @@ function query_stream(){
 }
 
 /**
+ * Poll my website (willbeddow.com/app/krlx-desktop), for a JSON feed of status messages and app app update aviailability
+ * Please note: This is the **only** place this app communicates in the background with my servers.
+ */
+function check_updates(){
+    $.getJSON({
+        url: UPDATE_URL,
+        success: function(data){
+            console.log("Got update data");
+            console.log(data);
+            console.log(shell);
+            let curr_version = remote.app.getVersion();
+            let remote_version = data.updates.version;
+            let update_url = data.updates.update;
+            let status_message = data.status;
+            // Update available
+            if (curr_version === remote_version){
+                $("#updates-title")[0].style.display = 'none';
+                $("#updates")[0].innerHTML = "You're all up to date! Version "+curr_version+". <a href='#' onclick='check_updates()'>Check again</a>";
+            }
+            else{
+                $("#updates-title")[0].style.display = 'block';
+                $("#message-card").addClass("bg-warning");
+                $("#messages-title").innerHTML = "Update Available!";
+                $("#updates")[0].innerHTML = "<strong>Update available, <a href='#' onclick='shell.openExternal(\""+update_url+"\")'>get it here!</a>"
+            }
+            if (status_message){
+                $("#message-inner-title")[0].style.display = "block";
+                $("#message-card").removeClass("border-primary").addClass("border-info");
+                $("#messages")[0].innerHTML = status_message;
+            }
+            else{
+                $("#message-inner-title")[0].style.display = 'none';
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            console.log("Update check errror "+jqXHR+" "+textStatus+" "+errorThrown);
+        }
+    })
+}
+
+/**
  * Log in with Spotify
  */
 function spotify_basic_auth(auth_data){
@@ -346,9 +388,9 @@ $(document).ready(function(){
     spotify_basic_auth(spotify_api);
     console.log("Starting interval");
     query_stream();
-    // The handler for checking the KRLX API every 5 seconds
+    // The handler for checking the KRLX API every 30 seconds
     setInterval(query_stream, 30000);
     //query_stream();
-
+    check_updates();
 });
 
