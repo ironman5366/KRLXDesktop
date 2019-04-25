@@ -1,10 +1,17 @@
 const { app, BrowserWindow, globalShortcut } = require('electron');
 const fs = require('fs');
+var ua = require('universal-analytics');
+const tracking_id = "UA-67885845-4";
+var visitor = ua(tracking_id);
+const { init } = require('@sentry/electron');
+init({
+    dsn: 'https://79f7d930af9c4696a5229b962be84102@sentry.io/1446827',
+    enableNative: false,
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
-const krlx_url = "http://live.krlx.org/data.php";
 
 function createWindow () {
 
@@ -13,7 +20,7 @@ function createWindow () {
 
     // and load the index.html of the app.
     win.loadFile('index.html');
-
+    win.visitor = visitor;
     // Register media shortcuts
     globalShortcut.register("MediaPlayPause",
         function(){

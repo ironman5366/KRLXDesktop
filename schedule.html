@@ -61,17 +61,22 @@
         &copy <script>document.write(new Date().getFullYear())</script>
     </div>
     <script>
+        let visitor = require('electron').remote.getCurrentWindow().visitor;
+        let app_version = require('electron').remote.app.getVersion();
+        visitor.screenview("Schedule", "KRLX Desktop", app_version).send();
         let play_button = '<img class="img-fluid" src="assets/play.svg" width="50" height="50">';
         let pause_button = '<img class="img-fluid" src="assets/pause.svg" width="50" height="50">'
         let yourAudio = document.getElementById('stream'),
             ctrl = document.getElementById('audioControl');
         function do_playpause(){
+
             // Update the Button
             var pause = ctrl.innerHTML === pause_button;
             ctrl.innerHTML = pause ? play_button : pause_button;
 
             // Update the Audio
             var method = pause ? 'pause': 'play';
+            visitor.event("Music", method).send();
             yourAudio[method]();
 
             // Prevent Default Action

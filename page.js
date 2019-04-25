@@ -6,6 +6,15 @@ const Base64 = require('./node_modules/js-base64').Base64;
 const fs = require('fs');
 const moment = require('./assets/moment.min.js');
 const spotify_api = require('./spotify_api.json');
+const { init } = require('@sentry/electron');
+let visitor = remote.getCurrentWindow().visitor;
+
+visitor.screenview("Home Screen", "KRLX Desktop", remote.app.getVersion()).send();
+
+init({
+    dsn: 'https://79f7d930af9c4696a5229b962be84102@sentry.io/1446827',
+    enableNative: false,
+});
 // The RegEx to resolve student images from the directory
 const DIR_REG = new RegExp('(<div class="email"><span class="icon">' +
     '\\n{0,1}<\\/span>(\\w+)&nbsp;)|<span class="icon"><\\/span><a href="mailto:(\\w+)@carleton.edu">');
@@ -321,7 +330,6 @@ function check_updates(){
         success: function(data){
             console.log("Got update data");
             console.log(data);
-            console.log(shell);
             let curr_version = remote.app.getVersion();
             let remote_version = data.updates.version;
             let update_url = data.updates.update;

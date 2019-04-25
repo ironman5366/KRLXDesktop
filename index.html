@@ -144,6 +144,10 @@
         let yourAudio = document.getElementById('stream'),
             ctrl = document.getElementById('audioControl');
         function do_playpause(){
+            let visitor = require('electron').remote.getCurrentWindow().visitor;
+
+            visitor.event("Music", method).send();
+
             // Update the Button
             var pause = ctrl.innerHTML === pause_button;
             ctrl.innerHTML = pause ? play_button : pause_button;

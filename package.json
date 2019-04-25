@@ -1,6 +1,6 @@
 {
   "name": "krlxdesktop",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A desktop player for KRLX",
   "main": "index.js",
   "scripts": {
@@ -40,13 +40,14 @@
     ]
   },
   "dependencies": {
+    "@sentry/electron": "^0.17.1",
     "bootstrap": "^4.3.1",
     "bootswatch": "^4.3.1",
     "jquery": "^3.4.0",
     "js-base64": "^2.5.1",
     "moment": "^2.24.0",
-    "popper": "^1.0.1",
     "popper.js": "^1.15.0",
+    "universal-analytics": "^0.4.20",
     "yarn": "^1.15.2"
   },
   "postinstall": "electron-builder install-app-deps"
