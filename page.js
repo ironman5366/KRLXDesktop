@@ -311,6 +311,13 @@ function query_stream(){
             $.get({
                 url: API_URL,
                 success: function (data){
+                    console.log("Replacing data...");
+                    // Match quotes inside the string
+                    let quoteErrorRegex = new RegExp("[:,]\"([^:,]*\"[^:,]*)\"[:,]", 'g');
+                    let quoteErrors = quoteErrorRegex.exec(data);
+                    if (quoteErrors[1] != null){
+                        data = data.replace(quoteErrors[1], "Invalid Song Title")
+                    }
                     let parsed_data = JSON.parse(data);
                     console.log("Fixed stream data");
                     handle_data(parsed_data);
