@@ -313,10 +313,10 @@ function query_stream(){
                 success: function (data){
                     console.log("Replacing data...");
                     // Match quotes inside the string
-                    let quoteErrorRegex = new RegExp("[:,]\"([^:,]*\"[^:,]*)\"[:,]", 'g');
+                    let quoteErrorRegex = new RegExp("\"(?:title|album|artist)\":\"(((?!,\"(album|artist|timestamp)\").)+\"((?!,\"(album|artist|timestamp)\").)*)\",\"(?:album|artist|timestamp)\"", 'g');
                     let quoteErrors = quoteErrorRegex.exec(data);
                     if (quoteErrors[1] != null){
-                        data = data.replace(quoteErrors[1], "Invalid Song Title")
+                        data = data.replace(quoteErrors[1], "Invalid Title")
                     }
                     let parsed_data = JSON.parse(data);
                     console.log("Fixed stream data");
