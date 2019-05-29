@@ -154,6 +154,14 @@
 
             // Update the Audio
             var method = pause ? 'pause': 'play';
+            var bufferLength = yourAudio.buffered.length;
+            if (bufferLength >= 1){
+                bufferLength--;
+                console.log("Buffering");
+                // Seek to the end of the stream regardless
+                yourAudio.currentTime = yourAudio.buffered.end(bufferLength);
+            }
+
             yourAudio[method]();
 
             // Prevent Default Action

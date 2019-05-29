@@ -71,12 +71,20 @@
         function do_playpause(){
 
             // Update the Button
+            // Update the Button
             var pause = ctrl.innerHTML === pause_button;
             ctrl.innerHTML = pause ? play_button : pause_button;
 
             // Update the Audio
             var method = pause ? 'pause': 'play';
-            visitor.event("Music", method).send();
+            var bufferLength = yourAudio.buffered.length;
+            if (bufferLength >= 1){
+                bufferLength--;
+                console.log("Buffering");
+                // Seek to the end of the stream regardless
+                yourAudio.currentTime = yourAudio.buffered.end(bufferLength);
+            }
+
             yourAudio[method]();
 
             // Prevent Default Action

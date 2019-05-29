@@ -1,6 +1,6 @@
 {
   "name": "krlxdesktop",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A desktop player for KRLX",
   "main": "index.js",
   "scripts": {
