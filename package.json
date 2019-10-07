@@ -1,6 +1,6 @@
 {
   "name": "krlxdesktop",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A desktop player for KRLX",
   "main": "index.js",
   "scripts": {
@@ -33,8 +33,6 @@
       "category": "Music"
     },
     "files": [
-      "spotify_api.json",
-      "assets/spotify_api.json",
       "assets/*",
       "**/**"
     ]
