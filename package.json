@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/ironman5366/KRLXDesktop#readme",
   "devDependencies": {
-    "electron": "^4.1.4",
+    "electron": "^9.1.0",
     "electron-builder": "^20.39.0"
   },
   "build": {
